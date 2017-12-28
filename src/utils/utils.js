@@ -1,14 +1,12 @@
 /**
  * Created by lenovo on 2017/12/4.
  */
-import $ from 'jquery';
 
 const SUCCESSCODE = '000000';
 const REPONSE_CODE_LOGIN_INVALID = 'user.invalid'; // 响应编码 - 用户失效
 const httpBasePath = 'http://localhost:8089';
 let isWexin = null;
 let appid = '' //TODO:待申请。
-
 const Utils = {
   SUCCESSCODE: SUCCESSCODE,
   REPONSE_CODE_LOGIN_INVALID: REPONSE_CODE_LOGIN_INVALID,
@@ -35,45 +33,53 @@ const Utils = {
    * @param  {string}   method      默认POST
    * @param  {object}   options         扩展参数
    */
-  ajax(serviceName, params, cb, serviceType, method, options) {
-    params = $.extend({}, params, {
-      _client_version_no: '1.0.0'
-    });
-    let url = this.apiUrl(serviceName, serviceType, options ? options.basePath : '/');
-    // console.log(url, params);
-    let opts = {
-      url: url,
-      type: method || 'POST',
-      dataType: 'json',
-      jsonp: false, // JQuery有bug，如果Content-Type是application/json，表单里有两个连续的??，就会引起bug， jquery就会把请求结果当成jsonp，用script方式来执行结果
-      data: params,
-      success: (resp, textStatus, jqXHR) => {
-        if (resp.responseCode === this.SUCCESSCODE) {
-          cb && cb(null, resp.model, resp, textStatus, jqXHR);
-        }
-        // else if (resp.responseCode === this.REPONSE_CODE_LOGIN_INVALID && (!options || options.checkLogin !== false)) { // 未登录/登录超时 - 跳转到登录页面
-        //   // TODO:功能待完善
-        //   if (this.isWeixin()) {
-        //     this.weichatLogin();
-        //   } else {
-        //     window.location.href = httpBasePath + '/login?target=' + encodeURIComponent(window.location.href);
-        //   }
-        // }
-        else {
-          cb && cb((resp.responseMsg != '' ? resp.responseMsg : (resp.responseCode + '#' + resp.responseMsg)), undefined, resp, textStatus, jqXHR);
-        }
-      },
-      error: function (XMLHttpRequest, textStatus, errorThrown) {
-        console.log(errorThrown);
-        cb && cb(textStatus || '请求失败', undefined, null, textStatus, XMLHttpRequest, errorThrown);
-      }
+  ajax(url, params, cb, serviceType, method, options) {
+    let headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
     };
-
-    if (typeof options === 'object') {
-      $.extend(opts, ext);
-    }
-
-    $.ajax(opts);
+    method = method && method.toUpperCase() || 'POST'
+    return new Promise(function (resolve, reject) {
+      if (method === 'GET') {
+        if (params) {
+          let paramsArray = [];
+          //encodeURIComponent
+          Object.keys(params).forEach(key => paramsArray.push(key + '=' + params[key]))
+          if (url.search(/\?/) === -1) {
+            url += '?' + paramsArray.join('&')
+          } else {
+            url += '&' + paramsArray.join('&')
+          }
+        }
+        fetch(url)
+          .then((response) => {
+            if (response.responseCode === SUCCESSCODE) {
+              resolve(response);
+            } else {
+              return reject({status: response.status})
+            }
+          })
+          .catch((err) => {
+            reject({status: -1});
+          })
+      } else if (method === 'POST') {
+        fetch(url, {
+          method: 'POST',
+          headers: headers,
+          body: params,
+        })
+          .then((response) => {
+            if (response.responseCode === SUCCESSCODE) {
+              resolve(response);
+            } else {
+              reject({status: response.status})
+            }
+          })
+          .catch((err) => {
+            reject(err);
+          })
+      }
+    })
   },
   /**
    * 微信授权登录
@@ -120,17 +126,6 @@ const Utils = {
     }
 
     return params;
-    // var keyVals = str.split('&'); // 按&分割
-    // var params = {};
-    // for (var i = 0; i < keyVals.length; i++) {
-    //   var keyVal = keyVals[i];
-    //   // 按照=分割
-    //   var splitIndex = keyVal.indexOf('=');
-    //   if (splitIndex !== -1) {
-    //     params[keyVal.substring(0, splitIndex)] = keyVal.substring(splitIndex + 1);
-    //   }
-    // }
-    // return params;
   }
 };
 

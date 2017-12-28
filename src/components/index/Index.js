@@ -11,7 +11,7 @@ import {
 class Index extends Component {
   render() {
     return <View>
-      <Text>hello i am index</Text>
+      <Text>hello i am index22</Text>
     </View>
   }
 }

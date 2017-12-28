@@ -2,7 +2,6 @@
  * Created by lenovo on 2017/7/31.
  * 校验工具，对表单提交数据进行校验
  */
-import './valid.css';
 
 /* 去前后空格
  **@params {string} str 字符串
