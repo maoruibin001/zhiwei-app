@@ -45,27 +45,27 @@ yarn install
 react-native run-android
 ```
 
-## 项目踩过的坑（会持续更新）
-* 1、react-native安装环境配置各种报错，服务不能启动。
-** 解决方案：严格按照官方推荐配置，并一定注意java版本1.8。
+# 项目踩过的坑（会持续更新）
+## 1、react-native安装环境配置各种报错，服务不能启动。
+* 解决方案：严格按照官方推荐配置，并一定注意java版本1.8。
 
-* 2、启动项目引入React和Component报错
-** 解决方案：采用项目依赖的react引入React和Component,不要从react-native中引入。
+## 2、启动项目引入React和Component报错
+* 解决方案：采用项目依赖的react引入React和Component,不要从react-native中引入。
 
-* 3、项目的排列方式为竖向排列。
-** 解决方案：默认flexDerection 为 column，需要手动设置为 row。
+## 3、项目的排列方式为竖向排列。
+* 解决方案：默认flexDerection 为 column，需要手动设置为 row。
 
-* 4、TabNavigator和FlatList一起使用，底部内容被遮挡问题。
-** 解决方案：给FlatList加一个margin(个人觉得这个方案并不好，虽然实现了效果，不过感觉很挫，但并没有找到好的实现方式)。
+## 4、TabNavigator和FlatList一起使用，底部内容被遮挡问题。
+* 解决方案：给FlatList加一个margin(个人觉得这个方案并不好，虽然实现了效果，不过感觉很挫，但并没有找到好的实现方式)。
 
-* 5、影藏TabNavigator时出现一个灰色的横条
-** 解决方案：在TabNavigator上设置sceneStyle={{paddingBottom:0}}，当然这个值可以动态设置，但隐藏时必须设置为0。
+## 5、影藏TabNavigator时出现一个灰色的横条
+* 解决方案：在TabNavigator上设置sceneStyle={{paddingBottom:0}}，当然这个值可以动态设置，但隐藏时必须设置为0。
 
-* 6、搜索框外面加一个View，并设置对应的flex，键盘输入内容时不展示。
-** 解决方案： 给外层View价格高度。
+## 6、搜索框外面加一个View，并设置对应的flex，键盘输入内容时不展示。
+* 解决方案： 给外层View价格高度。
 
-* 7、Image引入图片时source没用问题
-** 解决方案：source对应资源为后端返回资源时使用source={{uri: xxx}}这种方式引入，所以就要求后端必须返回绝对地址，不能返回相对地址。相对地址引入采用require()的方式，但是require只能引入字符串对应的地址，不能引入变量对应地址。
+## 7、Image引入图片时source没用问题
+* 解决方案：source对应资源为后端返回资源时使用source={{uri: xxx}}这种方式引入，所以就要求后端必须返回绝对地址，不能返回相对地址。相对地址引入采用require()的方式，但是require只能引入字符串对应的地址，不能引入变量对应地址。
 
-* 8、在一个View中使用ScrollableTabView内容不展示问题
-** 解决方案：需要给View设置一个高度，不然不会展示。
+## 8、在一个View中使用ScrollableTabView内容不展示问题
+* 解决方案：需要给View设置一个高度，不然不会展示。
