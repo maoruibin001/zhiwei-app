@@ -15,7 +15,7 @@ let userInfo = {
   "id": 1,
   "name": "毛瑞彬",
   "phone": "18603054239",
-  "pwd": "476809473",
+  "pwd": "4768094733",
   "experience": "0",
   "integral": "0",
   "imgUrl": "http:\/\/img1.mukewang.com\/59f6c68e0001665305000348-100-100.jpg",
@@ -51,11 +51,10 @@ class Mine extends Component {
       this.setState({
         userInfo: userInfo
       })
-    }, 0)
+    }, 1000)
   }
 
   _renderRow({item, index}) {
-
     return <View style={(index + 1) % 4 === 0 ? styles.itemMargin : styles.item}>
       <View style={styles.itemLeft}><Image source={{uri: item.iconUrl}} style={styles.iconImg}/></View>
       <View style={styles.itemRight}><Text style={styles.itemText}>{item.name}</Text></View>
