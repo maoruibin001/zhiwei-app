@@ -40,7 +40,7 @@ class Mine extends Component {
         {name: '我的关注', id: 3, desc: '', hasMsg: 0, iconUrl: 'https://png.icons8.com/color/2x/visible.png'},
         {name: '我的开源', id: 4, desc: '', hasMsg: 0, iconUrl: 'https://png.icons8.com/color/2x/ms-project.png'},
         {name: '我的回答', id: 5, desc: '', hasMsg: 0, iconUrl: 'https://png.icons8.com/dusk/2x/faq.png'},
-        {name: '我的书架', id: 6, desc: '', hasMsg: 0, iconUrl: 'https://png.icons8.com/cotton/2x/read.png'},
+        {name: '我的书架2', id: 6, desc: '', hasMsg: 0, iconUrl: 'https://png.icons8.com/cotton/2x/read.png'},
       ],
     }
   }
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     height: 30,
   },
   flat:  {
-    marginBottom: 100,
+    marginBottom: 130,
   }
 });
 export default Mine;

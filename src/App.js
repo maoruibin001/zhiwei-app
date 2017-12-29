@@ -41,7 +41,7 @@ class App extends Component {
     return (
       <TabNavigator
         sceneStyle={{
-          paddingBottom:this.state.defaultTabHeight
+          paddingBottom:0,
         }}
         tabBarStyle={{
           height:this.state.defaultTabHeight,

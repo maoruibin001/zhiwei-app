@@ -10,11 +10,13 @@ import {
 } from 'react-native';
 
 import Hearder from './Hearder';
+import Content from './Content';
 class Index extends Component {
   render() {
     let {navigate} = this.props.navigation;
-    return <View>
+    return <View style={{height: 700}}>
       <Hearder navigate={navigate}/>
+      <Content/>
     </View>
   }
 }
