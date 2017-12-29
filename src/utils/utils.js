@@ -7,6 +7,35 @@ const REPONSE_CODE_LOGIN_INVALID = 'user.invalid'; // 响应编码 - 用户失�
 const httpBasePath = 'http://localhost:8089';
 let isWexin = null;
 let appid = '' //TODO:待申请。
+
+export const eventManger = {
+  handlers: {},
+  //类型,绑定事件 
+  addHandler:function(type,handler) {
+    if (typeof this.handlers[type] == "undefined") {
+      this.handlers[type] = [];//每个事件都可以绑定多次
+    }
+    this.handlers[type].push(handler);
+  },
+  removeHandler:function(type, handler) {
+    let events = this.handlers[type];
+    for (let i = 0, len = events.length; i < len; i++) {
+      if (events[i] == handler) {
+        events.splice(i, 1);
+        break;
+      }
+    }
+  },
+  trigger: function (type) {
+    if (this.handlers[type] instanceof Array) {
+      let handlers = this.handlers[type];
+      let args = Array.prototype.slice.call(arguments, 1);
+      for (let i = 0, len = handlers.length; i < len; i++) {
+        handlers[i].apply(null, args);
+      }
+    }
+  }
+};
 const Utils = {
   SUCCESSCODE: SUCCESSCODE,
   REPONSE_CODE_LOGIN_INVALID: REPONSE_CODE_LOGIN_INVALID,

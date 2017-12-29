@@ -16,7 +16,8 @@ import {
 //export 因为要在其他类中使用
 export default class Search extends Component{
   toSearch() {
-    this.props.navigate('Search');
+    let navigate = this.props.navigate;
+    navigate('Search');
   }
   render(){
     return (

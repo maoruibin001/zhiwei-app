@@ -15,7 +15,12 @@ const Navs = StackNavigator({
     }
   },
   Search: {
-    'screen': Search
+    'screen': Search,
+    navigationOptions: {
+      headerStyle: {
+        display: 'none'
+      }
+    }
   }
 }, {
   initialRouteName: 'Home'

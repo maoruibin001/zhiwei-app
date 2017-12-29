@@ -18,24 +18,43 @@ import OpenSource from './components/openSource/OpenSource';
 // import Life from './components/life/Life';
 import Mine from './components/mine/Mine';
 
+import {eventManger} from './utils/utils';
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: 'index'
+      selected: 'index',
+      defaultTabHeight: 50,
     }
   }
 
+  componentDidMount() {
+    eventManger.addHandler('changeBarHeight', this.onPress.bind(this))
+  }
+  onPress(data){
+    this.setState({
+      defaultTabHeight: data.hidden ? 0 : 50
+    });
+  }
   render() {
     return (
-      <TabNavigator>
+      <TabNavigator
+        sceneStyle={{
+          paddingBottom:this.state.defaultTabHeight
+        }}
+        tabBarStyle={{
+          height:this.state.defaultTabHeight,
+          overflow:'hidden'
+        }}
+      >
         <TabNavigator.Item
           title="首页"
           titleStyle={styles.iconText}
           selected={'index' === this.state.selected}
           renderIcon={() => <Image source={require('./images/cottage.png')} style={styles.iconStyle}/>}
           onPress={() => this.setState({selected: 'index'})}>
-          <Index/>
+          <Index op={this.onPress}/>
         </TabNavigator.Item>
         <TabNavigator.Item
           title="技术"
