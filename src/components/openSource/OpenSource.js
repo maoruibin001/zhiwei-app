@@ -11,7 +11,7 @@ import {
 class OpenSource extends Component {
   render() {
     return <View>
-      <Text>hello i am openSource</Text>
+      <Text>hello i am openSource33</Text>
     </View>
   }
 }
