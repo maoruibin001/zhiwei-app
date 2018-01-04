@@ -21,8 +21,5 @@ export default () => {
     <Focus tabLabel='关注'/>
     <Recommend tabLabel='推荐'/>
     <Hot tabLabel='热榜'/>
-    {/*<Text tabLabel='关注'>My</Text>*/}
-    {/*<Text tabLabel='推荐'>favorite</Text>*/}
-    {/*<Text tabLabel='热榜'>project</Text>*/}
   </ScrollableTabView>;
 }

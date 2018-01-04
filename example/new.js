@@ -22,11 +22,14 @@ var obj = {
 var kk = {
   age: 30
 }
-
+var ke = {
+  tt: 23
+}
 obj.__proto__ = kk;
+obj.__proto__.__proto__ = null
 
 for (let key in obj) {
-  if (obj.hasOwnProperty(key)) {
     console.log(key)
-  }
 }
+
+console.log(Object.keys(obj))
